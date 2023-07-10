@@ -1,0 +1,24 @@
+
+{% extends 'main.html' %}
+{% block content %}
+  <center>
+    <hr>
+    <br>
+    <h1>Fake News prediction</h1><br>
+    <p style="color:green;"><b>{{ predicted_text }}</b></p><br>
+    <form action="/submit" method='POST'> 
+        <div class="mb-3">
+            <center>
+            <p>Machine learning techniques can help us detect fake news efficiently and accurately.<br> Using natural language processing techniques, 
+                machine learning algorithms can accurately detect and categorize true and false news<p><br>
+          <label for="exampleInputEmail1" class="form-label">News Text</label>
+          <input type="text" name="news" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter News" maxlength="200">
+          <div id="emailHelp" class="form-text">We'll Check This News is FAKE or FACT !</div>
+            </center>
+        </div>
+       <br>
+       <a href="{{url_for('submit')}}" ><button type="submit" class="btn btn-primary">Submit</button></a><br><br>
+        <img src="{{url_for('static',filename="img/FACTorFAKE.jpg")}}">
+      </form>
+  </center>
+ {% endblock %}
