@@ -30,7 +30,7 @@ mdurl==0.1.2
 mysqlclient==2.1.1
 numpy
 packaging==23.1
-pandas==2.0.3
+pandas
 Pillow==9.5.0
 pipdeptree==2.9.5
 pipreqs==0.4.13
