@@ -63,6 +63,6 @@ urllib3==2.0.2
 validators==0.20.0
 virtualenv
 watchdog==3.0.0
-Werkzeug==2.3.6
-yarg==0.1.9
-zipp==3.15.0
+Werkzeug
+yarg
+zipp
