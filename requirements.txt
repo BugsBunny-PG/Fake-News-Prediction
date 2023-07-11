@@ -46,7 +46,7 @@ pytz==2023.3
 requests==2.31.0
 rich==13.3.5
 scikit-learn
-scipy
+scipy==1.11.1
 six==1.16.0
 smmap==5.0.0
 SQLAlchemy==2.0.15
