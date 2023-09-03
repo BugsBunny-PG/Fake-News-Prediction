@@ -4,13 +4,13 @@ The aim of the fake news project is to help news readers to identify bias and mi
 We have collected news articles with veracity labels from fact-checking websites and used them to train text classification systems to detect FAKE or FACT
 
 ## Installation
-To make use of the Feature Selection Toolbox's capabilities, simply follow these installation steps:
+To make use of the FakeSpotter capabilities, simply follow these installation steps:
 
 ###  Clone the Repository
 Begin by cloning this repository to your local machine. Open your terminal and execute the following command:
 
 ```bash
-git clone https://github.com/BugsBunny-PG/Feature-Selection-Toolbox.git
+https://github.com/BugsBunny-PG/Fake-News-Prediction.git
 ```
 ###  Set Up a Virtual Environment (Optional but Recommended)
 It is advisable to work within a virtual environment to maintain a clean and isolated development environment. To create and activate a virtual environment, execute the following commands:
