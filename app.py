@@ -21,7 +21,11 @@ def submit():
        tf_news=vector.transform([newstxt])
        pred=model.predict(tf_news)[0]
        print(pred)
-       return render_template('prediction.html',predicted_text="News is ->{}".format(pred))
+       if(pred==0):
+           res="FAKE NEWS"
+       else:
+           res="FACT"
+       return render_template('prediction.html',predicted_text="{}".format(res))
     else:
         return redirect('/prediction')
        

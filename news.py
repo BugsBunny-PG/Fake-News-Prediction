@@ -1,41 +1,47 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-import numpy as np
-from sklearn.metrics import accuracy_score,confusion_matrix
 
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import metrics
+
+# Load the CSV file
 df=pd.DataFrame()
-df=pd.read_csv('news.csv')
-y_df=df.label
+df=pd.read_csv('fakeNewsDatset.csv')
 # print(y_df)
 
+# Replace NaN values in "Body" with values from "Headline"
+df['Body'].fillna(df['Headline'], inplace=True)
 
-x_train,x_test,y_train,y_test=train_test_split(df['text'],y_df,test_size=0.2,random_state=20)
-from sklearn.feature_extraction.text import TfidfVectorizer
+# Define the target (y) and features (X)
+y = df['Label']
+X = df['Body']
 
-from sklearn.linear_model import PassiveAggressiveClassifier
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-#initialize a IfidVectorizer
-vector = TfidfVectorizer(stop_words='english',max_df=0.7)
+# Applying TF-IDF to the dataset
+tfidf_vect = TfidfVectorizer(stop_words='english')
+tfidf_train = tfidf_vect.fit_transform(X_train)
+tfidf_test = tfidf_vect.transform(X_test)
 
-#fit and transform
-
-tf_train=vector.fit_transform(x_train)
-tf_test=vector.transform(x_test)
-
-model=PassiveAggressiveClassifier(max_iter=50)
-model.fit(tf_train,y_train)
-pred=model.predict(tf_test)
-sc=accuracy_score(y_test,pred)
-print(sc)
-print(confusion_matrix(y_test,pred))
+# Applying Naive Bayes
+clf = MultinomialNB()
+clf.fit(tfidf_train, y_train)
+pred = clf.predict(tfidf_test)
+score = metrics.accuracy_score(y_test, pred)
+print("Accuracy: %0.3f" % score)
+cm = metrics.confusion_matrix(y_test, pred)
+print(cm)
 
 #save model
 import pickle
 
 filename='finalized_model.pkl'
 
-pickle.dump(model,open(filename,'wb'))
+pickle.dump(clf,open(filename,'wb'))
 
 file='vectorizer.pkl'
 
-pickle.dump(vector,open(file,'wb'))
+pickle.dump(tfidf_vect,open(file,'wb'))
